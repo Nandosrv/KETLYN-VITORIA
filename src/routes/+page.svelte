@@ -1,28 +1,39 @@
 <script>
 	import { onMount } from 'svelte';
-	import home from '$lib/images/home.png'
+	import home from '$lib/images/home.png';
 	import { goto } from '$app/navigation';
   
-	function openLetter() {
-	  goto('/nexts');
-	}
-
 	let visible = false;
 
 	onMount(() => {
-		visible = true;
+		setTimeout(() => {
+			visible = true;
+		}, 2000); // Tempo do "loading" (em milissegundos)
 	});
+
+	function openLetter() {
+		goto('/nexts');
+	}
 </script>
 
 <div class="relative min-h-screen overflow-hidden">
   <!-- Background image with overlay -->
-  <img src="{home}" alt="Imagem de fundo" class="absolute w-full h-full object-cover z-0" />
-  <div class="absolute inset-0  bg-opacity-40 z-10"></div>
+  <img src={home} alt="Imagem de fundo" class="absolute w-full h-full object-cover z-0" />
+  <div class="absolute inset-0 bg-opacity-40 z-10"></div>
 
   <!-- Content -->
   <div class="relative z-20 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
     <div class="w-full max-w-lg">
-      <div class="text-center transform transition-all duration-1000 ease-out {visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}">
+      <!-- Loading - Heart Animation -->
+      <div class={`absolute ${visible ? 'opacity-0' : 'opacity-100'} transition-all duration-1000`}>
+        <div class="flex justify-center items-center space-x-2">
+          <div class="w-12 h-12 border-4 border-t-transparent border-red-500 rounded-full animate-spin"></div> <!-- Spinner -->
+          <div class="text-red-500 text-4xl animate-pulse">💖</div> <!-- Heart Animation -->
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class={`text-center transform transition-all duration-1000 ease-out ${visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
         <!-- Título -->
         <h1 class="text-[#F44210] text-4xl sm:text-5xl md:text-6xl font-bold mb-6 shadow-text">
           KETLYN VITÓRIA
