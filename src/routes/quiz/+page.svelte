@@ -2,7 +2,7 @@
     import { fly } from 'svelte/transition';
     import { goto } from '$app/navigation';
     import frit from '$lib/images/pnj1.png'
-    
+    import gigi from '$lib/images/gigi.gif'
     let answers = {
       q1: '',
       q2: '',
@@ -55,8 +55,10 @@
       <p class="mb-4">Dois anos se passaram, e sei que muitas coisas mudaram, mas o que não mudou foi o meu amor por você. Vamos refletir juntos?</p>
       
       <!-- Exibindo a imagem dela -->
-      <img src={frit} alt="Imagem da pessoa amada" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
-      
+      <img src={gigi} alt="Imagem da pessoa amada" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
+      <!-- <video class="w-32 h-32 rounded-full mx-auto mb-4 object-cover" src={gigi} controls>
+    </video>
+     -->
       {#if !showResult}
         {#if currentPage === 1}
           <div class="p-4 mb-4 rounded-lg bg-white bg-opacity-20 shadow-md" in:fly={{ y: 30, duration: 300 }}>
