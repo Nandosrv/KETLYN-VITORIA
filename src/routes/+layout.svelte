@@ -7,7 +7,13 @@
 
 <div class="app">
 	<!-- <Header /> -->
-
+	<header class="fixed top-0 left-0 w-full p-4 bg-white text-pink-600 flex justify-between items-center shadow-lg">
+		<a href="/" class="text-xl font-semibold">
+		  <span class="text-3xl">❤️</span> 
+		  Voltar à Página Principal
+		</a>
+	  </header>
+	  
 	<main>
 		{@render children()}
 	</main>
