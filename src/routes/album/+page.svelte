@@ -25,13 +25,12 @@
   import foto19 from '$lib/images/19.jpg';
   import foto20 from '$lib/images/20.mp4';
   import foto21 from '$lib/images/21.mp4';
-    import Footer from '../../componentes/footer.svelte';
 
-  // Arrays de imagens e vídeos
+  import Footer from '../../componentes/footer.svelte';
+
   const imagens = [pnj1, pnj2, pnj3, pnj4, foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8, foto9, foto10, foto11, foto12, foto13, foto14, foto15, foto16, foto17, foto18, foto19];
   const videos = [foto20, foto21];
 
-  // Declarações de amor para cada foto
   const declaracoes = [
     "Cada clique me lembra do quanto você é especial para mim.",
     "Esta foto é uma das muitas memórias que guardo com tanto carinho.",
@@ -62,7 +61,6 @@
   let currentVideo = '';
 
   const openModal = (content: string) => {
-    // Verifica se é imagem ou vídeo
     if (content.endsWith('.mp4')) {
       currentVideo = content;
       currentImage = '';
@@ -78,6 +76,10 @@
     currentImage = '';
     currentVideo = '';
   };
+
+  const disableRightClick = (event: MouseEvent) => {
+    event.preventDefault();
+  };
 </script>
 
 <main class="mt-13 flex items-center justify-center h-screen bg-gradient-to-r from-purple-500 to-pink-500 text-white">
@@ -88,11 +90,11 @@
       <!-- Grid de imagens -->
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {#each imagens as imagem, index}
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
               <div 
                 role="button" 
                 tabindex="0" 
                 on:click={() => openModal(imagem)} 
-                on:keydown={(e) => e.key === 'Enter' && openModal(imagem)} 
                 class="rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform cursor-pointer">
                   <img src={imagem} alt={`Imagem ${index + 1}`} class="w-full h-48 object-cover"/>
                   <div class="p-4 bg-gray-800 text-white">
@@ -103,13 +105,17 @@
 
           <!-- Grid de vídeos -->
           {#each videos as video, index}
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
               <div 
                 role="button" 
                 tabindex="0" 
                 on:click={() => openModal(video)} 
-                on:keydown={(e) => e.key === 'Enter' && openModal(video)} 
                 class="rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform cursor-pointer">
-                  <video class="w-full h-48 object-cover" src={video} controls>
+                  <video 
+                    class="w-full h-48 object-cover" 
+                    src={video} 
+                    controls
+                    on:contextmenu={disableRightClick}>
                     <track kind="captions" srcLang="en" label="English"/>
                     Seu navegador não suporta vídeo.
                   </video>
@@ -149,3 +155,5 @@
   </div>
   
 </main>
+
+<Footer />
