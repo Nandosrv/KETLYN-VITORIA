@@ -1,22 +1,46 @@
-<script>
+<script lang="ts">
+  import { fly, fade } from 'svelte/transition';
+  import { quintOut } from 'svelte/easing';
   import { goto } from '$app/navigation';
+  import Footer from '../componentes/footer.svelte';
+
+  let hoveredButton: string | null = null;
 </script>
 
-<main class="flex items-center justify-center h-screen bg-gradient-to-r from-pink-500 to-red-500 text-white">
-  <div class="text-center p-8 rounded-lg bg-white bg-opacity-20 shadow-lg w-96">
-    <h1 class="text-3xl font-semibold mb-4">Uma Carta de Amor</h1>
-    <p class="mb-8">"Você é o motivo do meu sorriso, meu amor eterno..."</p>
-    <button 
-      class="bg-pink-600 px-6 py-2 text-white rounded-lg mb-4 hover:bg-pink-700 transition-all"
-      on:click={() => goto('/album')}
-    >
-      Ver Álbum
-    </button>
-    <button 
-      class="bg-pink-600 px-6 py-2 text-white rounded-lg hover:bg-pink-700 transition-all"
-      on:click={() => goto('/quiz')}
-    >
-      Iniciar Quiz
-    </button>
+<svelte:head>
+  <title>Uma Carta de Amor</title>
+  <meta name="description" content="Uma página especial para expressar amor" />
+</svelte:head>
+
+<main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 text-white px-4 py-8">
+  <div 
+    class="text-center p-8 rounded-2xl bg-white bg-opacity-20 backdrop-blur-md shadow-xl max-w-md w-full mx-auto transform transition-all duration-300 hover:scale-105"
+    in:fly="{{ y: 50, duration: 1000, easing: quintOut }}"
+  >
+    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-red-600">Uma Carta de Amor</h1>
+    <p class="mb-8 text-lg md:text-xl text-black leading-relaxed">"Você é o motivo do meu sorriso, meu amor eterno..."</p>
+    
+    <div class="space-y-4">
+      {#each [{text: 'Ver Álbum', route: '/album'}, {text: 'Iniciar Quiz', route: '/quiz'}] as button}
+        <button 
+          class="w-full bg-red-500 px-6 py-3 text-white rounded-lg transition-all duration-300 transform hover:bg-pink-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50"
+          on:click={() => goto(button.route)}
+          on:mouseenter={() => hoveredButton = button.text}
+          on:mouseleave={() => hoveredButton = null}
+          aria-label={button.text}
+        >
+          {button.text}
+          {#if hoveredButton === button.text}
+            <span in:fade="{{ duration: 200 }}" class="ml-2">❤️</span>
+          {/if}
+        </button>
+      {/each}
+    </div>
   </div>
 </main>
+
+<Footer />
+
+<style lang="postcss">
+ 
+</style>
