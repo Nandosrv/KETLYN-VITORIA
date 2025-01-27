@@ -46,12 +46,12 @@
                             Voltar
                         </button>
 
-                        <button
+                        <!-- <button
                             class="bg-red-500 text-white px-6 py-3 rounded-full hover:bg-red-600 transition-all duration-300 text-lg font-semibold transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 w-full sm:w-auto"
                             on:click={nextPage}
                         >
                             Próxima página
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
