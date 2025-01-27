@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import home from '$lib/images/home.png';
 	import { goto } from '$app/navigation';
+	import card from '../componentes/card.svelte';
+    import Card from '../componentes/card.svelte';
   
 	let visible = false;
 
@@ -56,10 +58,10 @@
 
         <!-- Botão de clique -->
         <button
-          class="px-8 py-4 bg-red-500 text-white font-bold text-lg rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50"
+          class="px-8 py-4  text-white font-bold text-lg rounded-full hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50"
           on:click={openLetter}
         >
-          Abrir Carta
+         <Card />
         </button>
       </div>
     </div>
